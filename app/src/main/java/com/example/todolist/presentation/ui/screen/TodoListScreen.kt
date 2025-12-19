@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todolist.presentation.viewmodel.TodoViewModel
@@ -37,7 +38,7 @@ fun TodoListScreen(
                         modifier = Modifier.padding(16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Column {
+                        Column(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = todo.title,
                                 style = MaterialTheme.typography.titleMedium
@@ -49,7 +50,8 @@ fun TodoListScreen(
                         }
                         Checkbox(
                             checked = todo.isCompleted,
-                            onCheckedChange = { viewModel.toggleTodo(todo.id) }
+                            onCheckedChange = { viewModel.toggleTodo(todo.id) },
+                            modifier = Modifier.testTag("checkbox_${todo.id}")
                         )
                     }
                 }
